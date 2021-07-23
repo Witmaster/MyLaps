@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Hosting;
 using MyLaps.Interfaces;
 using MyLaps.Services;
-using System.IO;
 
 namespace MyLaps
 {
@@ -15,16 +14,15 @@ namespace MyLaps
             {
                 sp.AddSingleton<ICsvParserService, CsvParserService>()
                     .AddSingleton<IWinnerDeciderService, WinnerDeciderService>()
-                    .AddSingleton<IOutputService, OutputService>();
+                    .AddSingleton<IOutputService, OutputService>()
+                    .AddSingleton<IRaceFileProcessorService, RaceFileProcessorService>();
             });
             using IHost host = builder.Build();
 
             var path = args[0]; //take in 1 argument - path to the .csv file with input data
-            var file = File.OpenRead(path);
-            var parser = host.Services.GetRequiredService<ICsvParserService>();
-            var laps = parser.ParseCsv(file);
-            var decider = host.Services.GetRequiredService<IWinnerDeciderService>();
-            decider.DecideWinner(laps);
+            
+            var processor = host.Services.GetRequiredService<IRaceFileProcessorService>();
+            processor.Run(path);
 
             host.WaitForShutdown();
         }

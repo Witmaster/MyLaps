@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using MyLaps.Models;
+using System.Collections.Generic;
 
 namespace MyLaps.Interfaces
 {
-    interface IWinnerDeciderService
+    public interface IWinnerDeciderService
     {
         void DecideWinner(IEnumerable<LapModel> laps);
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyLaps
+namespace MyLaps.Models
 {
     public class LapModel
     {
