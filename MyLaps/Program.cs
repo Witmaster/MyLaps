@@ -14,7 +14,8 @@ namespace MyLaps
             builder.ConfigureServices(sp =>
             {
                 sp.AddSingleton<ICsvParserService, CsvParserService>()
-                    .AddSingleton<IWinnerDeciderService, WinnerDeciderService>();
+                    .AddSingleton<IWinnerDeciderService, WinnerDeciderService>()
+                    .AddSingleton<IOutputService, OutputService>();
             });
             using IHost host = builder.Build();
 

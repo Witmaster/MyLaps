@@ -7,6 +7,11 @@ namespace MyLaps.Services
 {
     public class WinnerDeciderService : IWinnerDeciderService
     {
+        private readonly IOutputService _outputService;
+        public WinnerDeciderService(IOutputService outputService)
+        {
+            _outputService = outputService;
+        }
         public void DecideWinner(IEnumerable<LapModel> laps)
         {
             var racerLaps = laps.GroupBy(x => x.Kart);
@@ -42,7 +47,7 @@ namespace MyLaps.Services
                     reference = lap;
                 }
             }
-            Console.WriteLine($"Winner is {winner.Kart}! Best lap: #{lapNumber} at {winner.PassingTime:HH:mm:ss}, with lap time {bestLap}");
+            _outputService.WriteLine($"Winner is {winner.Kart}! Best lap: #{lapNumber} at {winner.PassingTime:HH:mm:ss}, with lap time {bestLap}");
         }
     }
 }
