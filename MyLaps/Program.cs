@@ -23,8 +23,8 @@ namespace MyLaps
             var totalLaps = racerLaps.Select(x => x.Count()).Max();
             //ignore values after first racer finishes last lap
             var lastValidLap = racerLaps.Where(x => x.Count() == totalLaps).Select(x => x.OrderByDescending(v => v.PassingTime).First()).OrderBy(v => v.PassingTime).First();
-            var lastValidLapIndex = laps.IndexOf(lastValidLap);
-            var validLaps = laps.Take(lastValidLapIndex + 1);
+
+            var validLaps = laps.Where(x => x.PassingTime <= lastValidLap.PassingTime);
 
             racerLaps = validLaps.OrderBy(x => x.PassingTime).GroupBy(x => x.Kart);
 
