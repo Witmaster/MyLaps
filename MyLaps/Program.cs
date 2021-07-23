@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Hosting;
 using MyLaps.Interfaces;
 using MyLaps.Services;
-using System;
 using System.IO;
 
 namespace MyLaps
@@ -26,7 +25,7 @@ namespace MyLaps
             var decider = host.Services.GetRequiredService<IWinnerDeciderService>();
             decider.DecideWinner(laps);
 
-            Console.ReadLine();
+            host.WaitForShutdown();
         }
 
         static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args);
