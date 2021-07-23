@@ -1,12 +1,13 @@
 ﻿using Microsoft.VisualBasic.FileIO;
+using MyLaps.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
-namespace MyLaps
+namespace MyLaps.Services
 {
-    public class CsvParser
+    public class CsvParserService : ICsvParserService
     {
         public List<LapModel> ParseCsv(Stream csv)
         {
