@@ -1,5 +1,4 @@
 ﻿using MyLaps.Interfaces;
-using System.IO;
 
 namespace MyLaps.Services
 {
@@ -14,8 +13,7 @@ namespace MyLaps.Services
         }
         public void Run(string filePath)
         {
-            var file = File.OpenRead(filePath);
-            var laps = _csvParserService.ParseCsv(file);
+            var laps = _csvParserService.ParseCsv(filePath);
             _winnerDeciderService.DecideWinner(laps);
         }
     }

@@ -4,16 +4,15 @@ using MyLaps.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 
 namespace MyLaps.Services
 {
     public class CsvParserService : ICsvParserService
     {
-        public List<LapModel> ParseCsv(Stream csv)
+        public List<LapModel> ParseCsv(string filePath)
         {
             var res = new List<LapModel>();
-            using (TextFieldParser parser = new TextFieldParser(csv))
+            using (TextFieldParser parser = new TextFieldParser(filePath))
             {
                 parser.SetDelimiters(",");
                 while (!parser.EndOfData)
